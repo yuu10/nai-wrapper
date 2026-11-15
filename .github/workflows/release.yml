@@ -1,7 +1,8 @@
 name: Release
 # リリース用。`v*` タグの push で、3 OS の全形式をビルドし、GitHub の Releases に「下書き・pre-release」で載せる。
 # 公開(下書きの解除)は人が行う。タグと package.json の version が違えば、ビルドの前に失敗させる。
-# タグは、ユーザーが GitHub の Releases から作る(例: v0.1.0)。
+# タグは、ユーザーが作る(例: v0.1.0)。ターミナルで `git tag v0.1.0` → `git push origin v0.1.0`(作者名が入らない軽量タグ)が基本。
+# 先に GitHub の Releases から Release を作った場合は、新しい Release は作らず、そこにファイルを添付する。
 on:
   push:
     tags: ['v*']
@@ -95,8 +96,15 @@ jobs:
 
           ライセンスは MIT です(アプリ内の「ヘルプ → ライセンスと権利表記を開く」にも載せています)。
           EOF
-          gh release create "$TAG" artifacts/* \
-            --repo "$GITHUB_REPOSITORY" \
-            --draft --prerelease \
-            --title "NAI Wrapper ${TAG}(ベータ版)" \
-            --notes-file notes.md
+          # 同じタグの Release が、すでにあるとき(GitHub の画面から先に作ったとき)は、そこにファイルを添付する
+          # (説明文・下書きかどうか・pre-release かどうかは、そのまま)。なければ、下書き・pre-release で作る
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
+            echo "既存の Release($TAG)に、ファイルを添付します。"
+            gh release upload "$TAG" artifacts/* --repo "$GITHUB_REPOSITORY" --clobber
+          else
+            gh release create "$TAG" artifacts/* \
+              --repo "$GITHUB_REPOSITORY" \
+              --draft --prerelease \
+              --title "NAI Wrapper ${TAG}(ベータ版)" \
+              --notes-file notes.md
+          fi

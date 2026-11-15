@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="ja">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NAI Wrapper ライセンスと権利表記</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin: 0; background: #0e0f21; color: #e8e8f0; font: 15px/1.8 sans-serif; }
+  main { max-width: 860px; margin: 0 auto; padding: 24px 20px 80px; }
+  h1 { font-size: 24px; margin: 0 0 4px; }
+  h2 { font-size: 19px; margin: 40px 0 8px; padding-top: 12px; border-top: 1px solid #2a2d55; }
+  a { color: #9fb4ff; }
+  code, pre { font-family: Consolas, Menlo, monospace; background: #1b1d3a; border-radius: 4px; }
+  code { padding: 1px 5px; color: #cdd8ff; }
+  pre { padding: 10px 14px; overflow-x: auto; line-height: 1.5; font-size: 13px; white-space: pre-wrap; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; }
+  th, td { border: 1px solid #2a2d55; padding: 6px 10px; text-align: left; vertical-align: top; }
+  th { background: #1b1d3a; }
+  .note { margin: 12px 0; padding: 10px 14px; background: #2a2540; border-left: 4px solid #e2b24a; border-radius: 4px; }
+  .toc { background: #1b1d3a; padding: 10px 18px; border-radius: 6px; }
+  .toc li { margin: 2px 0; }
+  .sub { color: #aab; }
+</style>
+<main>
+<h1>NAI Wrapper ライセンスと権利表記</h1>
+<p class="sub">非公式・ベータ版。NovelAI の公式アプリではありません。</p>
+
+<div class="toc"><ol>
+  <li><a href="#about">このアプリについて(非公式であること)</a></li>
+  <li><a href="#self">NAI Wrapper のライセンス</a></li>
+  <li><a href="#electron">Electron と Chromium</a></li>
+  <li><a href="#jsmigemo">jsmigemo</a></li>
+  <li><a href="#migemodict">migemo 辞書(Mozc・UniDic 由来)</a></li>
+  <li><a href="#data">外部のデータと拡張機能</a></li>
+</ol></div>
+
+<h2 id="about">1. このアプリについて(非公式であること)</h2>
+<ul>
+  <li>NAI Wrapper は、個人が作った<b>非公式</b>のアプリです。NovelAI を運営する Anlatan Inc. とは、提携も承認も推薦も受けていません。</li>
+  <li>「NovelAI」は、Anlatan Inc. が提供するサービスの名称です。名称・ロゴなどの権利は、同社に帰属します。このアプリは、NovelAI のページを表示するために、この名称を説明の目的でのみ使っています。</li>
+  <li>NovelAI のサービスの利用には、<a href="https://novelai.net/terms">NovelAI の利用規約</a>が適用されます。このアプリの利用で生じた問題(アカウントへの制限を含む)について、作者は責任を負いません。自動生成の機能は、サービスに負荷をかけない範囲で、自己責任でお使いください。</li>
+</ul>
+
+<h2 id="self">2. NAI Wrapper のライセンス</h2>
+<p>NAI Wrapper(このアプリのソースコード)は、MIT ライセンスで提供します。</p>
+<pre>MIT License
+
+Copyright (c) 2026 NAI Wrapper contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</pre>
+
+<h2 id="electron">3. Electron と Chromium</h2>
+<p>このアプリは、<a href="https://www.electronjs.org/">Electron</a>(33 系。MIT ライセンス)の上で動き、Electron は Chromium などの部品を含みます。Chromium と、その中の部品のライセンスは、インストールしたフォルダの <code>LICENSES.chromium.html</code> に、まとめて入っています(Electron の標準の同梱物です)。</p>
+<pre>Copyright (c) Electron contributors
+Copyright (c) 2013-2020 GitHub Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</pre>
+
+<h2 id="jsmigemo">4. jsmigemo(ローマ字から日本語を探す部品)</h2>
+<p><a href="https://github.com/oguna/jsmigemo">jsmigemo</a>(MIT ライセンス)を使っています。</p>
+<pre>MIT License
+
+Copyright (c) 2026 oguna
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</pre>
+
+<h2 id="migemodict">5. migemo 辞書(Mozc・UniDic 由来)</h2>
+<p>jsmigemo に付属する辞書(<code>migemo-compact-dict</code>)は、<a href="https://github.com/oguna/yet-another-migemo-dict">yet-another-migemo-dict</a>(BSD 3-Clause)から作られています。この辞書は、<a href="https://github.com/google/mozc">Mozc</a>(BSD 3-Clause)と <a href="https://clrd.ninjal.ac.jp/unidic/">UniDic</a>(GPL / LGPL / BSD 3-Clause のいずれか。ここでは BSD 3-Clause)を元にしています。次の 3 つの表記が必要です。</p>
+
+<p><b>yet-another-migemo-dict</b></p>
+<pre>Copyright (c) 2021, oguna
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+* Redistributions of source code must retain the above copyright notice,
+  this list of conditions and the following disclaimer.
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+* Neither the name of the &lt;organization&gt; nor the names of its contributors
+  may be used to endorse or promote products derived from this software
+  without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL &lt;COPYRIGHT HOLDER&gt; BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</pre>
+
+<p><b>Mozc</b></p>
+<pre>Copyright 2010-2018, Google Inc.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+  * Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  * Redistributions in binary form must reproduce the above
+    copyright notice, this list of conditions and the following disclaimer
+    in the documentation and/or other materials provided with the
+    distribution.
+  * Neither the name of Google Inc. nor the names of its
+    contributors may be used to endorse or promote products derived from
+    this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</pre>
+
+<p><b>UniDic</b></p>
+<pre>Copyright (c) 2011-2021, The UniDic Consortium
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+ * Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+
+ * Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the
+   distribution.
+
+ * Neither the name of the UniDic Consortium nor the names of its
+   contributors may be used to endorse or promote products derived
+   from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</pre>
+
+<h2 id="data">6. 外部のデータと拡張機能</h2>
+<ul>
+  <li><b>タグの辞書・日本語訳</b>: このアプリには同梱していません。メニュー「入力補助 → 辞書を作る(Danbooru から取得)…」で作った辞書は、あなたのパソコンの中だけに保存されます。データの出どころは Danbooru(<a href="https://danbooru.donmai.us/">danbooru.donmai.us</a>)で、日本語名は Danbooru Wiki の、CC BY-SA のデータを含みます。取り込んだ CSV の辞書・日本語訳は、それぞれの配布元のライセンスに従ってください。</li>
+  <li><b>拡張機能</b>: このアプリに付属していません。各自で入手し、それぞれのライセンスに従ってください。</li>
+</ul>
+</main>

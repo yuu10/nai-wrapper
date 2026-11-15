@@ -1,0 +1,32 @@
+{
+  "name": "nai-wrapper",
+  "version": "0.1.0",
+  "description": "Unofficial desktop wrapper for NovelAI",
+  "author": { "name": "NAI Wrapper contributors", "email": "noreply@example.com" },
+  "license": "MIT",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder",
+    "dist:win": "electron-builder --win",
+    "dist:mac": "electron-builder --mac",
+    "dist:linux": "electron-builder --linux"
+  },
+  "build": {
+    "appId": "dev.nai-wrapper.app",
+    "productName": "NAI Wrapper",
+    "compression": "maximum",
+    "electronLanguages": ["ja", "en-US"],
+        "files": ["main.js", "suggest-client.js", "panel-client.js", "manual.html", "licenses.html", "package.json", "build/icon.png"],
+    "win": { "target": ["nsis", "portable"] },
+    "mac": { "target": ["dmg", "zip"], "category": "public.app-category.productivity" },
+    "linux": { "target": ["AppImage", "deb"], "category": "Utility" }
+  },
+  "dependencies": {
+    "jsmigemo": "^0.5.2"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.0.0"
+  }
+}

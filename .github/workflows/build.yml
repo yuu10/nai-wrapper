@@ -1,0 +1,66 @@
+name: Build
+# 確認用のビルド。main への push と PR で自動実行し、手動実行では OS を選べる。
+# 確認用は 1 形式だけ(Windows=ポータブル版、macOS=zip、Linux=AppImage)。成果物は 14 日で消える。
+# リリース用(全形式・タグ)は release.yml。
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['**.md', 'examples/**', 'LICENSE']
+  pull_request:
+    paths-ignore: ['**.md', 'examples/**', 'LICENSE']
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'ビルドする OS(確認用は 1 つだけ選ぶと速くて軽い)'
+        type: choice
+        options: [windows, macos, linux, all]
+        default: all
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+    steps:
+      - id: m
+        env:
+          EVENT: ${{ github.event_name }}
+          TARGET: ${{ inputs.target }}
+        run: |
+          ALL='[{"name":"windows","os":"windows-latest","args":"--win portable"},{"name":"macos","os":"macos-latest","args":"--mac zip"},{"name":"linux","os":"ubuntu-latest","args":"--linux AppImage"}]'
+          T="${TARGET:-all}"
+          if [ "$EVENT" != "workflow_dispatch" ] || [ "$T" = "all" ]; then
+            M="$ALL"
+          else
+            M=$(echo "$ALL" | jq -c --arg t "$T" '[.[] | select(.name == $t)]')
+          fi
+          echo "matrix=$M" >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: plan
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm install
+      - run: node --check main.js
+      - run: npx electron-builder ${{ matrix.args }} --publish never
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nai-wrapper-${{ matrix.name }}
+          retention-days: 14
+          path: |
+            dist/*.exe
+            dist/*.dmg
+            dist/*.zip
+            dist/*.AppImage
+            dist/*.deb

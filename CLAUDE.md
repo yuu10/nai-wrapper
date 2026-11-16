@@ -31,7 +31,7 @@
 - `main.js`: アプリ本体(ウィンドウ作成、リンクの扱い、メニュー、CSV からの自動生成)。
 - `package.json`: 依存関係とビルド設定(electron-builder)。
 - `.github/workflows/build.yml`: 確認用のビルド(2026-11-16 に整理)。main への push と PR で自動実行(文書だけの変更は除く)。手動実行は OS を選べる。確認用は 1 形式だけ(Windows=ポータブル版、macOS=zip、Linux=AppImage)。成果物は 14 日保存。
-- `.github/workflows/release.yml`: リリース用(2026-11-16 に追加)。`v*` タグの push で、タグと `package.json` の version を照合し、3 OS の全形式をビルドして、Releases に**下書き・pre-release**で載せる(3 OS がすべて成功したときだけ。公開は人が行う)。`v0.1.0` で、実際に動いた(下の「確認状況」)。
+- `.github/workflows/release.yml`: リリース用(2026-11-16 に追加)。`v*` タグの push で、タグと `package.json` の version を照合し、3 OS の全形式をビルドして、Releases に**下書き・pre-release**で載せる(3 OS がすべて成功したときだけ。公開は人が行う)。`v0.1.0` で、実際に動いた(下の「確認状況」)。下書きの説明文のひな形(ファイル名は `__VERSION__` をタグの version に置き換える)には、動作確認の状況(0.1.0 のときのもの)が入っている。**公開(Publish)の前に、そのバージョンの確認結果に書き換える**(下書きの先頭に、その旨の隠しコメントが入る)。下書きの説明文を GitHub の API で直すときは、`tag_name` も一緒に指定する(指定しないと、タグ名が `untagged-…` に変わってしまう。2026-11-16 に起きた)。
 - `README.md`: 使い方・注意事項。
 - `LICENSE`: このアプリの MIT ライセンス。
 - `licenses.html`: アプリ内のライセンスと権利表記(メニュー「ヘルプ」から別ウィンドウで開く)。使う部品を変えたら更新する。`package.json` の `files` に入れてある。

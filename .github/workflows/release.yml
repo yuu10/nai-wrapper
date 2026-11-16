@@ -75,27 +75,32 @@ jobs:
         run: |
           ls -l artifacts
           cat > notes.md <<'EOF'
+          <!-- 下書きの説明文。公開(Publish)の前に、「動作確認の状況」を、このバージョンの確認結果に書き換えてください(下の内容は、0.1.0 のときのものです)。 -->
           ## NAI Wrapper(非公式・ベータ版)
 
           NovelAI を専用ウィンドウで開く、**非公式**のデスクトップアプリです。NovelAI(Anlatan Inc.)とは関係がありません。NovelAI の利用規約に従い、自己責任でお使いください。
 
           ### 注意
-          - **コード署名をしていません。** 初回の起動で警告が出ます。回避方法は、README の「署名なしの警告」を見てください。
-            - Windows: SmartScreen の画面で「詳細情報 → 実行」。
+          - **コード署名をしていません。** 初回の起動で警告が出ることがあります。回避方法は、README の「署名なしの警告」を見てください。
+            - Windows: SmartScreen の画面が出たら、「詳細情報 → 実行」。(ポータブル版では、警告が出ませんでしたが、環境によって出ることがあります。)
             - macOS: アプリを右クリックして「開く」。
           - **動作確認の状況**
-            - Windows: 開発環境(`npm start`)で確認済み。この配布物(インストーラ・ポータブル版)での動作は、未確認です。
+            - Windows ポータブル版(`NAI.Wrapper.__VERSION__.exe`): 起動できること、ログインがアプリを閉じても保持されることを、実機で確認済みです。
+            - Windows インストーラ版(`NAI.Wrapper.Setup.__VERSION__.exe`): **未確認**です。
             - macOS・Linux: **試験版・動作未確認**です。macOS の配布物は、Apple Silicon(arm64)向けです。
-          - 辞書・日本語訳・拡張機能は、付属していません(README を見てください)。
+          - 辞書・日本語訳・拡張機能は、付属していません。辞書は、メニュー「入力補助 → 辞書を作る(Danbooru から取得)…」で作れます(README を見てください)。
           - NovelAI の画面の作りが変わると、自動生成などが動かなくなることがあります。
+          - 「CSV 自動生成」「連続生成」は、NovelAI の利用規約上、問題になる可能性があります。回数や連続の上限を控えめにして、自己責任でお使いください。
 
           ### ファイル
-          - Windows: `.exe`(インストーラ版・ポータブル版)
-          - macOS: `.dmg` / `.zip`
-          - Linux: `.AppImage` / `.deb`
+          - Windows: `NAI.Wrapper.Setup.__VERSION__.exe`(インストーラ版)、`NAI.Wrapper.__VERSION__.exe`(ポータブル版。インストール不要)
+          - macOS: `NAI.Wrapper-__VERSION__-arm64.dmg`、`NAI.Wrapper-__VERSION__-arm64-mac.zip`
+          - Linux: `NAI.Wrapper-__VERSION__.AppImage`、`nai-wrapper___VERSION___amd64.deb`
 
           ライセンスは MIT です(アプリ内の「ヘルプ → ライセンスと権利表記を開く」にも載せています)。
           EOF
+          # __VERSION__ を、タグの version(先頭の v を除く)に置き換える
+          sed -i "s/__VERSION__/${TAG#v}/g" notes.md
           # 同じタグの Release が、すでにあるとき(GitHub の画面から先に作ったとき)は、そこにファイルを添付する
           # (説明文・下書きかどうか・pre-release かどうかは、そのまま)。なければ、下書き・pre-release で作る
           if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1; then

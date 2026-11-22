@@ -2,6 +2,7 @@ const { app, BrowserWindow, shell, Menu, session, dialog, clipboard, Notificatio
 const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
+const zlib = require('zlib');
 
 const START_URL = 'https://novelai.net/image'; // 起動時に開くページ(画像生成)
 // アプリ内で開くことを許可するホスト(それ以外は既定のブラウザで開く)
@@ -842,10 +843,21 @@ function readPngMetadata(file) {
   for (let i = 8; i + 12 <= buf.length;) {
     const len = buf.readUInt32BE(i);
     const type = buf.toString('latin1', i + 4, i + 8);
-    if (type === 'tEXt') {
+    if (type === 'tEXt' || type === 'iTXt') { // 新しい NovelAI の画像は iTXt(UTF-8。圧縮の印つき)で書く
       const body = buf.subarray(i + 8, i + 8 + len);
       const zero = body.indexOf(0);
-      if (zero > 0 && body.toString('latin1', 0, zero) === 'Comment') comment = body.toString('utf-8', zero + 1);
+      if (zero > 0 && body.toString('latin1', 0, zero) === 'Comment') {
+        if (type === 'tEXt') comment = body.toString('utf-8', zero + 1);
+        else {
+          // iTXt: キーワード 0 / 圧縮の印 1 バイト / 圧縮方式 1 バイト / 言語タグ 0 / 翻訳キーワード 0 / 本文
+          const langEnd = body.indexOf(0, zero + 3);
+          const transEnd = langEnd < 0 ? -1 : body.indexOf(0, langEnd + 1);
+          if (transEnd >= 0) {
+            const text = body.subarray(transEnd + 1);
+            try { comment = (body[zero + 1] === 1 ? zlib.inflateSync(text) : text).toString('utf-8'); } catch { /* 読めない */ }
+          }
+        }
+      }
     }
     if (type === 'IEND' || comment) break;
     i += 12 + len;
